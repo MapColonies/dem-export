@@ -24,5 +24,28 @@
         "options": null
       }
     }
+  },
+  "s3": {
+    "accessKeyId": "raster",
+    "secretAccessKey": "rasterPassword",
+    "endpointUrl": "http://10.8.0.9:9000",
+    "bucket": "dem-int",
+    "forcePathStyle": true,
+    "sslEnabled": false
+  },
+  "fs": {
+    "pvPath": "/home/ellama/export"
+  },
+  "exporter": {
+    "configProvider": "s3",
+    "batches": 2
+  },
+  "jobManager": {
+    "url": "https://job-manager-int-job-manager-route-integration.apps.j1lk3njp.eastus.aroapp.io",
+    "expirationDays": 30
+  },
+  "worker": {
+    "jobType": "dem",
+    "taskType": "dem"
   }
 }
