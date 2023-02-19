@@ -1,7 +1,7 @@
 openapi: 3.0.1
 info:
-  title: 3d exporter trigger
-  description: Exporting 3d model to S3/NFS
+  title: DEM exporter trigger
+  description: Exporting DEM model to S3/NFS
   version: 1.0.0
   license:
     name: MIT
@@ -79,7 +79,7 @@ components:
           type: string
     payload:
       type: object
-      description: 3d model payload
+      description: DEM model payload
       required:
         - modelId
         - modelPath
