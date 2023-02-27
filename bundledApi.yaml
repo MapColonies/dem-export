@@ -30,7 +30,7 @@ paths:
                 $ref: '#/components/schemas/error'
   /export:
     post:
-      operationId: createModel
+      operationId: export
       tags:
         - export
       summary: creates a new job and invokes a new model exporter flow

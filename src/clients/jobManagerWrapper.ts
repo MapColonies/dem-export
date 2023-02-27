@@ -1,10 +1,7 @@
 import { inject, injectable } from 'tsyringe';
 import config from 'config';
 import { Logger } from '@map-colonies/js-logger';
-import booleanEqual from '@turf/boolean-equal';
-import bboxPolygon from '@turf/bbox-polygon';
 import { ICreateTaskBody, JobManagerClient, OperationStatus } from '@map-colonies/mc-priority-queue';
-import { getUTCDate } from '@map-colonies/mc-utils';
 import { SERVICES } from '../common/constants';
 import {
   CreateJobBody,
@@ -14,6 +11,7 @@ import {
   JobResponse,
 } from '../common/interfaces';
 import { filesToTasks } from '../common/utilities';
+
 //this is the job manager api for find job DO NOT MODIFY
 interface IFindJob {
   resourceId?: string;
@@ -23,7 +21,7 @@ interface IFindJob {
   type?: string;
   shouldReturnTasks?: string;
   fromDate?: Date;
-  tillData?: Date;
+  tillDate?: Date;
   productType?: string;
 }
 

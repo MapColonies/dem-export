@@ -1,10 +1,9 @@
 import { Logger } from '@map-colonies/js-logger';
-import { ICreateTaskBody, OperationStatus } from '@map-colonies/mc-priority-queue';
+import { OperationStatus } from '@map-colonies/mc-priority-queue';
 import { inject, injectable } from 'tsyringe';
 import { JobManagerWrapper } from '../../clients/jobManagerWrapper';
 import { SERVICES } from '../../common/constants';
 import { CreateJobBody, IConfig, IConfigProvider, IExportResponse, ITaskParameters, Payload } from '../../common/interfaces';
-import { filesToTasks } from '../../common/utilities';
 
 @injectable()
 export class ExportManager {
@@ -15,9 +14,9 @@ export class ExportManager {
     @inject(SERVICES.CONFIGPROVIDER) private readonly configProvider: IConfigProvider
     ) {}
 
-  public async createModel(payload: Payload): Promise<IExportResponse> {
+  public async export(payload: Payload): Promise<IExportResponse> {
 
-    this.logger.info({ msg: 'creating tasks', path: payload.modelPath });
+    this.logger.info({ msg: 'Creating tasks', modelId: payload.modelId });
     
     // eslint-disable-next-line @typescript-eslint/no-magic-numbers
     const modelName: string = payload.modelPath.split('/').slice(-1)[0];

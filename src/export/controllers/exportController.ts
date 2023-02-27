@@ -1,12 +1,12 @@
-import { Logger } from '@map-colonies/js-logger';
 import { RequestHandler } from 'express';
 import httpStatus from 'http-status-codes';
 import { injectable, inject } from 'tsyringe';
+import { Logger } from '@map-colonies/js-logger';
 import { SERVICES } from '../../common/constants';
 import { IExportResponse, Payload } from '../../common/interfaces';
 import { ExportManager } from '../models/exportManager';
 
-type CreateResourceHandler = RequestHandler<undefined, IExportResponse, Payload>;
+type ExportHandler = RequestHandler<undefined, IExportResponse, Payload>;
 
 @injectable()
 export class ExportController {
@@ -16,11 +16,11 @@ export class ExportController {
     @inject(ExportManager) private readonly manager: ExportManager,
   ) {}
 
-  public create: CreateResourceHandler = (req, res, next) => {
-    const userInput: Payload = req.body;
+  public export: ExportHandler = async (req, res, next) => {
+    const input: Payload = req.body;
     try {
-      const jobCreated = this.manager.createModel(userInput);
-      this.logger.debug(`User input: ${JSON.stringify(userInput)}`);
+      const jobCreated = await this.manager.export(input);
+      this.logger.debug(`User input: ${JSON.stringify(input)}`);
       return res.status(httpStatus.CREATED).json(jobCreated);
     } catch (err) {
       next(err);
