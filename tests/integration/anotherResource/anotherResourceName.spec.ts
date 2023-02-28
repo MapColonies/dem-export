@@ -3,11 +3,11 @@ import { trace } from '@opentelemetry/api';
 import httpStatusCodes from 'http-status-codes';
 import { getApp } from '../../../src/app';
 import { SERVICES } from '../../../src/common/constants';
-import { IJobStatusModel } from '../../../src/jobStatus/models/jobStatusManager';
-import { JobStatusRequestSender } from './helpers/requestSender';
+import { IJobStatusModel } from '../../../src/status/models/statusManager';
+import { StatusRequestSender } from './helpers/requestSender';
 
 describe('export', function () {
-  let requestSender: JobStatusRequestSender;
+  let requestSender: StatusRequestSender;
   beforeEach(function () {
     const app = getApp({
       override: [
@@ -16,12 +16,12 @@ describe('export', function () {
       ],
       useChild: true,
     });
-    requestSender = new JobStatusRequestSender(app);
+    requestSender = new StatusRequestSender(app);
   });
 
   describe('Happy Path', function () {
     it('should return 200 status code and the resource', async function () {
-      const response = await requestSender.getResource();
+      const response = await requestSender.getStatus();
 
       expect(response.status).toBe(httpStatusCodes.OK);
       expect(response).toSatisfyApiSpec();

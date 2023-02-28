@@ -45,12 +45,10 @@ export class JobManagerWrapper extends JobManagerClient {
     // this.jobDomain = config.get<string>('jobManager.jobDomain');
   }
 
-  public async create(job: CreateJobBody,files: string[]): Promise<IExportResponse> {
+  public async create(job: CreateJobBody): Promise<IExportResponse> {
     const expirationDate = new Date();
     expirationDate.setDate(expirationDate.getDate() + this.expirationDays);
     job.expirationDate = expirationDate;
-    const tasks: ICreateTaskBody<ITaskParameters>[] = filesToTasks(files, this.tilesTaskType, []);
-    job.tasks = tasks;
 
     const jobResponse = await this.createJob<IJobParameters, ITaskParameters>(job);
     

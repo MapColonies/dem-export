@@ -20,14 +20,6 @@ export interface Payload {
    */
   modelId: string;
   /**
-   * Model files location path
-   */
-  modelPath: string;
-  /**
-   * Model tileset filename
-   */
-  tilesetFileName: string;
-  /**
    * Metadata
    */
   metadata: LayerDemMetadata;

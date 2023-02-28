@@ -4,20 +4,20 @@ import httpStatus from 'http-status-codes';
 import { injectable, inject } from 'tsyringe';
 import { SERVICES } from '../../common/constants';
 import { IJobStatusResponse, JobStatusParams } from '../../common/interfaces';
-import { JobStatusManager } from '../models/jobStatusManager';
+import { StatusManager } from '../models/statusManager';
 
-type GetResourceHandler = RequestHandler<JobStatusParams, IJobStatusResponse>;
+type GetStatusHandler = RequestHandler<JobStatusParams, IJobStatusResponse>;
 
 @injectable()
-export class JobStatusController {
+export class StatusController {
 
   public constructor(
     @inject(SERVICES.LOGGER) private readonly logger: Logger,
-    @inject(JobStatusManager) private readonly manager: JobStatusManager,
+    @inject(StatusManager) private readonly manager: StatusManager,
   ) {}
 
-  public checkStatus: GetResourceHandler = async (req, res) => {
+  public getStatus: GetStatusHandler = async (req, res) => {
     const { jobID } = req.params;
-    return res.status(httpStatus.OK).json(await this.manager.checkStatus(jobID));
+    return res.status(httpStatus.OK).json(await this.manager.getStatus(jobID));
   };
 }

@@ -1,5 +1,5 @@
-import { ICreateTaskBody } from '@map-colonies/mc-priority-queue';
 import config from 'config';
+import { ICreateTaskBody } from '@map-colonies/mc-priority-queue';
 import { ITaskParameters } from './interfaces';
 
 export const filesToTasks = (files: string[], taskType: string, tasks: ICreateTaskBody<ITaskParameters>[]): ICreateTaskBody<ITaskParameters>[] => {

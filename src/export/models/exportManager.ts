@@ -18,9 +18,6 @@ export class ExportManager {
 
     this.logger.info({ msg: 'Creating tasks', modelId: payload.modelId });
     
-    // eslint-disable-next-line @typescript-eslint/no-magic-numbers
-    const modelName: string = payload.modelPath.split('/').slice(-1)[0];
-    const files: string[] = await this.configProvider.listFiles(modelName);
     const type = payload.metadata.type ?? 'unknown';
 
     const createJobRequest: CreateJobBody = {
@@ -35,7 +32,7 @@ export class ExportManager {
       status: OperationStatus.IN_PROGRESS,
     };
 
-    const res: IExportResponse = await this.jobManagerClient.create(createJobRequest, files);
+    const res: IExportResponse = await this.jobManagerClient.create(createJobRequest);
 
     return res;
   }

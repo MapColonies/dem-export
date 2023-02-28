@@ -8,12 +8,12 @@ info:
     url: https://opensource.org/licenses/MIT
 
 paths:
-  /jobStatus/{jobID}:
+  /status/{jobID}:
     get:
-      operationId: getJobStatus
+      operationId: getStatus
       tags:
-        - jobStatus
-      summary: gets the resource
+        - status
+      summary: gets the export job status
       parameters:
         - $ref: '#/components/parameters/jobID'
       responses:
@@ -22,7 +22,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/jobStatus'
+                $ref: '#/components/schemas/status'
         404:
           description: Not Found
           content:
@@ -82,28 +82,18 @@ components:
       description: DEM model payload
       required:
         - modelId
-        - modelPath
-        - tilesetFileName
         - metadata
       properties:
         modelId:
           type: string
           description: Model identifier
           example: 'a2234fdf'
-        modelPath:
-          type: string
-          description: Model files location path
-          example: '//domtest/mimi/archi/maz/silver/libot/NewYork'
-        tilesetFileName:
-          type: string
-          description: Model tileset filename
-          example: 'tileset.json'
         metadata:
           $ref: './Schema/3dCatalog/3dMetadata.yaml#/components/schemas/payload'
       additionalProperties: false
-    jobStatus:
+    status:
       type: object
-      description: The job response
+      description: Export job status
       required:
         - status
         - percentage

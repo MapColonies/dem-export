@@ -10,7 +10,7 @@ import httpLogger from '@map-colonies/express-access-log-middleware';
 import { SERVICES } from './common/constants';
 import { IConfig } from './common/interfaces';
 import { EXPORT_ROUTER_SYMBOL } from './export/routes/exportRouter';
-import { JOB_STATUS_ROUTER_SYMBOL } from './jobStatus/routes/jobStatusRouter';
+import { STATUS_ROUTER_SYMBOL } from './status/routes/statusRouter';
 import { handleError } from './common/handleError';
 
 @injectable()
@@ -21,7 +21,7 @@ export class ServerBuilder {
     @inject(SERVICES.CONFIG) private readonly config: IConfig,
     @inject(SERVICES.LOGGER) private readonly logger: Logger,
     @inject(EXPORT_ROUTER_SYMBOL) private readonly exportRouter: Router,
-    @inject(JOB_STATUS_ROUTER_SYMBOL) private readonly jobStatusRouter: Router
+    @inject(STATUS_ROUTER_SYMBOL) private readonly statusRouter: Router
   ) {
     this.serverInstance = express();
   }
@@ -42,7 +42,7 @@ export class ServerBuilder {
 
   private buildRoutes(): void {
     this.serverInstance.use('/export', this.exportRouter);
-    this.serverInstance.use('/jobStatus', this.jobStatusRouter);
+    this.serverInstance.use('/status', this.statusRouter);
     this.buildDocsRoutes();
   }
 
