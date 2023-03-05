@@ -222,7 +222,7 @@ components:
         - $ref: '#/components/schemas/MultiPolygon'
     schemas-payload:
       type: object
-      description: DEM tiles metadata payload
+      description: DEM metadata payload
       required:
         - productName
         - productType
