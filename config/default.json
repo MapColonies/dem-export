@@ -45,7 +45,7 @@
     "expirationDays": 30
   },
   "worker": {
-    "jobType": "RECORD_DEM",
+    "jobType": "DEM",
     "taskType": "DEM Export"
   }
 }
